@@ -41,3 +41,15 @@
   would call this a success; an A&P instructor sees a scope mismatch.
 - Possible mitigations to test later: metadata filtering by chapter,
   chapter-aware retrieval, or a pedagogical-scope instruction in the prompt.
+
+## 2026-05-18 — Scope guardrail (two-signal: best distance + close-chunk count)
+- Threshold 0.42, min 2 close chunks. Tuned from observed distances.
+- IN SCOPE: cardiac cycle (0.31, 3), semilunar valves (0.40, 2)
+- OUT OF SCOPE: hypertension meds (best 0.39 but only 1 close chunk — caught
+  by close-count rule, single threshold would have missed it), diet (0.57, 0)
+- BORDERLINE / FALSE NEGATIVE: blood pressure regulation declined (0.40, 1
+  close). Legitimately in-scope topic, but corpus content is thin/scattered
+  (rest of top-k is renal chapter at 0.43-0.45). The two-signal rule is doing
+  its job, but reveals that scope-drift in the corpus causes in-scope questions
+  to look out-of-scope. Connects to Failure Mode 2. A scoped (cardiovascular-only)
+  corpus would likely fix this — candidate experiment.
