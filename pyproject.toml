@@ -3,5 +3,19 @@ name = "ap-rag"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.9"
-dependencies = []
+requires-python = ">=3.12"
+dependencies = [
+    "chromadb>=1.5.9",
+    "llama-index>=0.14.22",
+    "ollama>=0.6.2",
+    "pypdf>=6.13.3",
+    "python-dotenv>=1.2.2",
+    "sentence-transformers>=5.6.0",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.31.0",
+    "jupyter>=1.1.1",
+    "ruff>=0.15.18",
+]
